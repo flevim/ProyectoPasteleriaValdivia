@@ -1,4 +1,4 @@
-# ProyectoValdiRico
+# Proyecto Pastelería Valdivia
 
 Integrantes: 
   - Nicolás Robledo
