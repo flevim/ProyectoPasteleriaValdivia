@@ -17,6 +17,7 @@ db.sequelize = sequelize;
 
 db.user = User; 
 db.role = Role; 
+db.product = Product;
 
 db.role.belongsToMany(db.user, {
     through: "user_roles",

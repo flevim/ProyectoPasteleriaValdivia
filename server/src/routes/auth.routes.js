@@ -8,12 +8,12 @@ import {
 
 import { register, login } from '../controllers/auth.controller';
 
-router.post('/api/auth/register',  [
+router.post('/register',  [
     checkDuplicateUsernameOrEmail,
     checkRolesExisted], 
     register); 
 
-router.post('/api/auth/login', login); 
+router.post('/login', login); 
 
 export default router; 
 

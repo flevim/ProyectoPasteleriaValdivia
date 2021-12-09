@@ -9,16 +9,21 @@ import {
  } from '../middlewares/authJwt';
 
 import { 
-    allAccess,
     userBoard,
     adminBoard,
-    sellerBoard
+    sellerBoard,
+    getAllUsers,
+    getUserById,
+    updateUserById,
+    deleteUserById
  } from '../controllers/user.controller'; 
 
-router.get("/api/test/all", allAccess); 
-router.get("/api/test/user", [verifyToken], userBoard); 
-router.get("/api/test/seller", [verifyToken, isSeller],sellerBoard); 
-router.get("/api/test/admin", [verifyToken, isAdmin] ,adminBoard); 
+router.get("/", getAllUsers); 
+router.get("/:id", getUserById); 
+router.put("/:id", updateUserById); 
+router.delete("/:id", deleteUserById);
+//router.get("/api/test/seller", [verifyToken, isSeller],sellerBoard); 
+//router.get("/api/test/admin", [verifyToken, isAdmin] ,adminBoard); 
 
 
 export default router; 
