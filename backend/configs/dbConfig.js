@@ -3,14 +3,13 @@ import Sequelize from 'sequelize';
 
 dotenv.config(); 
 
-const userDB = process.env.DB_USER; 
-const dialect = process.env.DB_DIALECT; 
-const database = process.env.DB_DATABASE;
-const passwordDB = process.env.DB_PASSWORD; 
-
-export const sequelize = new Sequelize(database, userDB, passwordDB, {
+export const sequelize = new Sequelize(
+    process.env.DB_DATABASE, 
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
         host: 'localhost',
-        dialect: dialect,
+        dialect: process.env.DB_DIALECT,
         pool: {
             max: 5,
             min: 0,
@@ -27,3 +26,5 @@ try {
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
+
+export default sequelize; 

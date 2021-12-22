@@ -4,6 +4,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
+import morgan from 'morgan';
 
 import productRouter from './routers/productRouter.js';
 import userRouter from './routers/userRouter.js';
@@ -11,7 +12,7 @@ import orderRouter from './routers/orderRouter.js';
 import uploadRouter from './routers/uploadRouter.js';
 
 // Base de datos sequelize
-import dbConfig from './config/dbConfig'; 
+import dbConfig from './configs/dbConfig.js';
 
 dotenv.config();
 

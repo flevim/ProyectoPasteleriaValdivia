@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../config/dbConfig';
+import { sequelize } from '../configs/dbConfig';
 
 const User = sequelize.define('user', {
     id: {

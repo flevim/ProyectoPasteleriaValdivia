@@ -1,5 +1,5 @@
 import { DatabaseError, DataTypes, DATE, Model } from 'sequelize';
-import { sequelize } from '../config/db.config';
+import { sequelize } from '../configs/db.config';
 import Product from './Product';
 import User from './User'; 
 

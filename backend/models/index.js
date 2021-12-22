@@ -3,7 +3,7 @@ entre tablas en otra capa de abstracción
 que me permita poder programar con mayor 
 facilidad la api y la autenticación */ 
 
-import { sequelize } from '../config/db.config';
+import { sequelize } from '../configs/db.config';
 import Sequelize from 'sequelize';
 
 import User from './User';

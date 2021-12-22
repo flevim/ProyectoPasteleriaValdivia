@@ -1,5 +1,5 @@
 import { DataTypes, DATE, Model } from 'sequelize';
-import { sequelize } from '../config/db.config';
+import { sequelize } from '../configs/db.config';
 import Product from './Product';
 
 const OrderItem = sequelize.define('item_orden', {

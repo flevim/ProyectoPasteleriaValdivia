@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../config/db.config';
+import { sequelize } from '../configs/db.config';
 
 const Product = sequelize.define('producto', {
     name: {
@@ -16,7 +16,7 @@ const Product = sequelize.define('producto', {
         type: DataTypes.STRING
     },
     price: {
-        type: DataTypes.STRING
+        type: DataTypes.NUMBER
     },
     countInStock: {
         type: DataTypes.NUMBER
