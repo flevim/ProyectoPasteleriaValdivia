@@ -24,7 +24,7 @@ userRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
     // await User.remove({});
-    const createdUsers = await User.bulkCreate(data.users);
+    const createdUsers = await User.bulkCreate(data.user);
     res.send({ createdUsers });
   })
 );
@@ -60,24 +60,24 @@ userRouter.post(
 	expressAsyncHandler(async (req, res) => {
 		try {
 			const userCreated = await User.create({
-				name: req.body.name,
+				username: req.body.username,
 				email: req.body.email,
 				password: bcrypt.hashSync(req.body.password, 8),
 			});
-	
+			console.log(userCreated);
 			if (userCreated) {
-				res.send({
-					_id: createdUser._id,
-					name: createdUser.name,
-					email: createdUser.email,
-					isAdmin: createdUser.isAdmin,
-					token: generateToken(createdUser),
+				res.json({
+					_id: userCreated._id,
+					username: userCreated.username,
+					email: userCreated.email,
+					isAdmin: userCreated.isAdmin,
+					token: generateToken(userCreated),
 				});
-				return; 
+				
 			}
 	
 		} catch (err) {
-			res.status(500).send({ msg: err })
+			res.status(500).send({ msg: "Error" })
 		}
 		
 
@@ -100,35 +100,34 @@ userRouter.get(
   })
 );
 
+//es necesario testear esta ruta bien
 userRouter.put(
   '/profile',
   isAuth,
   expressAsyncHandler(async (req, res) => {
 	try {
 		const user = await User.findByPk(req.user._id);
-    
+		console.log(user); 
 		if (user) {
-		user.name = req.body.name || user.name;
-		user.email = req.body.email || user.email;
-		//if (user.isSeller) {
-		//  user.seller.name = req.body.sellerName || user.seller.name;
-		//  user.seller.logo = req.body.sellerLogo || user.seller.logo;
-		//  user.seller.description =
-		//    req.body.sellerDescription || user.seller.description;
-		//}
-		if (req.body.password) {
-			user.password = bcrypt.hashSync(req.body.password, 8);
-		}
-		const updatedUser = await user.update(req.body);
+			if (req.body.password) {
+				user.password = bcrypt.hashSync(req.body.password, 8);
+			}
+			
+			let userData = {
+				username: req.body.username || user.username,
+				email: req.body.email || user.email,
+				password: user.password
+			}
 		
-		res.send({
-			_id: updatedUser._id,
-			name: updatedUser.name,
-			email: updatedUser.email,
-			isAdmin: updatedUser.isAdmin,
-			isSeller: user.isSeller,
-			token: generateToken(updatedUser),
-		});
+			const updatedUser = await user.update(userData);
+			
+			res.send({
+				_id: updatedUser._id,
+				username: updatedUser.username,
+				email: updatedUser.email,
+				isAdmin: updatedUser.isAdmin,
+				token: generateToken(updatedUser),
+			});
 		}
 	} catch (err) {
 		res.status(500).send({msg: err}); 
@@ -181,12 +180,14 @@ userRouter.put(
 	try {
 		const user = await User.findByPk(req.params.id);
 		if (user) {
-			user.name = req.body.name || user.name;
-			user.email = req.body.email || user.email;
-			user.isSeller = Boolean(req.body.isSeller);
-			user.isAdmin = Boolean(req.body.isAdmin);
+			const userData = {
+				username: req.body.username || user.username,
+				email: req.body.email || user.email,
+				isAdmin: Boolean(req.body.isAdmin)
+			}
+			console.log()
 			// user.isAdmin = req.body.isAdmin || user.isAdmin;
-			const updatedUser = await user.update();
+			const updatedUser = await user.update(userData);
 			res.send({ message: 'User Updated', user: updatedUser });
 		} else {
 			res.status(404).send({ message: 'User Not Found' });

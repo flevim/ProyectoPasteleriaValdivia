@@ -1,5 +1,5 @@
 import { DataTypes, DATE, Model } from 'sequelize';
-import { sequelize } from '../configs/db.config';
+import { sequelize } from '../configs/dbConfig';
 import Product from './Product';
 
 const OrderItem = sequelize.define('item_orden', {
@@ -7,21 +7,21 @@ const OrderItem = sequelize.define('item_orden', {
         type: DataTypes.STRING,
     },
     qty: {
-        type: DataTypes.NUMBER
+        type: DataTypes.INTEGER
     },
     image: {
         type: DataTypes.STRING
     },
     price: {
-        type: DataTypes.NUMBER
+        type: DataTypes.INTEGER
     },
-    productId: {
-        type: DataTypes.NUMBER,
-        references: {
-            model: Product,
-            key: 'id'
-        }   
-    },
+    //productId: {
+    //    type: DataTypes.NUMBER,
+    //    references: {
+    //        model: Product,
+    //        key: 'id'
+    //    }   
+    //},
 }); 
 
 export default OrderItem; 

@@ -1,5 +1,5 @@
-import { DataTypes, DATE, Model, foreignKey, belongsTo } from 'sequelize';
-import { sequelize } from '../configs/db.config';
+import { DataTypes, DATE, Model } from 'sequelize';
+import { sequelize } from '../configs/dbConfig';
 
 
 const Adress = sequelize.define('direccion_envio', {

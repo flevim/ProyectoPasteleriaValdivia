@@ -3,7 +3,7 @@ entre tablas en otra capa de abstracción
 que me permita poder programar con mayor 
 facilidad la api y la autenticación */ 
 
-import { sequelize } from '../configs/db.config';
+import { sequelize } from '../configs/dbConfig.js';
 import Sequelize from 'sequelize';
 
 import User from './User';
@@ -11,6 +11,7 @@ import Product from './Product';
 import Order from './Order'; 
 import Adress from './Adress';
 import OrderItem from './OrderItem';
+import PaymentResult from './paymentResult'; 
 
 const db = {}; 
 
@@ -22,11 +23,11 @@ db.product = Product;
 db.order = Order;
 db.adress = Adress;
 db.orderItem = OrderItem;
-
+db.paymentResult = PaymentResult;
 
 // Relaciones Usuario 
 db.user.hasMany(db.order);
-db.hasMany(db.adress);
+db.user.hasMany(db.adress);
 
 db.adress.belongsTo(db.user, {
     foreignKey: 'userId' 
@@ -46,6 +47,11 @@ db.order.belongsTo(db.adress, {
 // Relacion item de orden
 db.orderItem.belongsTo(db.order); 
 db.orderItem.belongsTo(db.product); 
+
+// Relacion orden y paymentResult 
+
+db.order.hasOne(db.paymentResult); 
+db.paymentResult.belongsTo(db.order); 
 
 /*
 db.role.belongsToMany(db.user, {

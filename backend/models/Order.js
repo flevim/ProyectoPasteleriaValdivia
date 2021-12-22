@@ -1,36 +1,29 @@
-import { DatabaseError, DataTypes, DATE, Model } from 'sequelize';
-import { sequelize } from '../configs/db.config';
-import Product from './Product';
-import User from './User'; 
+import { DataTypes, DATE, Model } from 'sequelize';
+import { sequelize } from '../configs/dbConfig';
+//import User from './User'; 
 
 const Order = sequelize.define('orden', {
     paymentMethod: {
         type: DataTypes.STRING,
        
     },
-    paymentResult: {
-        id: DataTypes.STRING,
-        status: DataTypes.STRING,
-        update_time: DataTypes.STRING,
-        email_adress: DataTypes.STRING
-    },
     itemsPrice: {
-        type: DataTypes.NUMBER
+        type: DataTypes.INTEGER
     },
     shippingAdress: {
-        type: DataTypes.NUMBER
+        type: DataTypes.INTEGER
     },
     totalPrice: {
-        type: DataTypes.NUMBER
+        type: DataTypes.INTEGER
     },
 
-    user: {
-        type: DataTypes.NUMBER,
-        refrences: {
-            model: User,
-            key: 'id'
-        }
-    },
+    //user: {
+    //    type: DataTypes.NUMBER,
+    //    refrences: {
+    //        model: User,
+    //        key: 'id'
+    //    }
+    //},
     isPaid: {
         type: DataTypes.BOOLEAN,
         defaultValue: false

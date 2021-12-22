@@ -4,6 +4,7 @@ import { sequelize } from '../configs/dbConfig';
 const User = sequelize.define('user', {
     id: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         allowNull: false,
         autoIncrement: true        
         
@@ -20,7 +21,7 @@ const User = sequelize.define('user', {
     
     isAdmin: {
         type: DataTypes.BOOLEAN,
-        default: false
+        defaultValue: false
     },
     
     
