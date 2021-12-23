@@ -1,23 +1,15 @@
 {
-  "name": "amazona",
+  "name": "pvaldivia",
   "type": "module",
-  "version": "1.0.0",
-  "description": "Ecommerce website like amazon",
+  "version": "10.0",
+  "description": "Proyecto Taller de Ingeniería de Software",
   "main": "index.js",
   "scripts": {
     "build": "cd frontend && npm install && npm run build",
-    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/basir/amazona.git"
+    "start": "nodemon --watch backend --experimental-modules --es-module-specifier-resolution=node --exec node backend/server.js"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/basir/amazona/issues"
-  },
-  "homepage": "https://github.com/basir/amazona#readme",
   "devDependencies": {
     "eslint": "^7.9.0",
     "eslint-plugin-react": "^7.21.2",
@@ -33,6 +25,7 @@
     "mongoose": "^6.0.13",
     "morgan": "^1.10.0",
     "multer": "^1.4.3",
+    "mysql2": "^2.3.3",
     "sequelize": "^6.12.0",
     "socket.io": "^4.4.0"
   }
