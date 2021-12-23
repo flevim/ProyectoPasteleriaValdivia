@@ -159,12 +159,12 @@ function App() {
               <MessageBox variant="danger">{errorCategories}</MessageBox>
             ) : (
               categories.map((c) => (
-                <li key={c}>
+                <li key={c.category}>
                   <Link
-                    to={`/search/category/${c}`}
+                    to={`/search/category/${c.category}`}
                     onClick={() => setSidebarIsOpen(false)}
                   >
-                    {c}
+                    {c.category}
                   </Link>
                 </li>
               ))
@@ -173,7 +173,6 @@ function App() {
         </aside>
         <main>
           <Routes>
-            <Route path="/seller/:id" element={<SellerScreen />}></Route>
             <Route path="/cart" element={<CartScreen />}></Route>
             <Route path="/cart/:id" element={<CartScreen />}></Route>
             <Route
@@ -212,11 +211,7 @@ function App() {
               element={<SearchScreen />}
               exact
             ></Route>
-            <Route
-              path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
-              element={<SearchScreen />}
-              exact
-            ></Route>
+            
 
             <Route
               path="/profile"
