@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 
 syncDB();
 
-mongoose.connect(process.env.MONGODB_URL);
+//mongoose.connect(process.env.MONGODB_URL);
 //app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);

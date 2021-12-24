@@ -26,17 +26,17 @@ export default function UserListScreen(props) {
     });
   }, [dispatch, successDelete]);
   const deleteHandler = (user) => {
-    if (window.confirm('Are you sure?')) {
-      dispatch(deleteUser(user._id));
+    if (window.confirm('¿Estás seguro?')) {
+      dispatch(deleteUser(user.id));
     }
   };
   return (
     <div>
-      <h1>Users</h1>
+      <h1>Usuarios</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
       {successDelete && (
-        <MessageBox variant="success">User Deleted Successfully</MessageBox>
+        <MessageBox variant="success">Usuario eliminado exitósamente</MessageBox>
       )}
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -47,10 +47,10 @@ export default function UserListScreen(props) {
           <thead>
             <tr>
               <th>ID</th>
-              <th>NAME</th>
+              <th>NOMBRE</th>
               <th>EMAIL</th>
-              <th>IS ADMIN</th>
-              <th>ACTIONS</th>
+              <th>ES ADMINISTRADOR</th>
+              <th>ACCIONES</th>
             </tr>
           </thead>
           <tbody>
@@ -59,21 +59,21 @@ export default function UserListScreen(props) {
                 <td>{user.id}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
-                <td>{user.isAdmin ? 'YES' : 'NO'}</td>
+                <td>{user.isAdmin ? 'SI' : 'NO'}</td>
                 <td>
                   <button
                     type="button"
                     className="small"
                     onClick={() => navigate(`/user/${user.id}/edit`)}
                   >
-                    Edit
+                    Editar
                   </button>
                   <button
                     type="button"
                     className="small"
                     onClick={() => deleteHandler(user)}
                   >
-                    Delete
+                    Eliminar
                   </button>
                 </td>
               </tr>
