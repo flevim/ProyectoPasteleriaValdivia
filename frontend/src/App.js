@@ -32,6 +32,8 @@ import DashboardScreen from './screens/DashboardScreen';
 import SupportScreen from './screens/SupportScreen';
 import ChatBox from './components/ChatBox';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 function App() {
   const cart = useSelector((state) => state.cart);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -68,12 +70,10 @@ function App() {
               Pasteleria Valdivia
             </Link>
           </div>
-          <div>
-            <SearchBox />
-          </div>
+         
           <div>
             <Link to="/cart">
-              Cart
+            <i className="fa fa-cart-plus"></i>
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}
@@ -81,7 +81,7 @@ function App() {
             {userInfo ? (
               <div className="dropdown">
                 <Link to="#">
-                  {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
+                  {userInfo.username} <i className="fa fa-caret-down"></i>{' '}
                 </Link>
                 <ul className="dropdown-content">
                   <li>
@@ -100,21 +100,7 @@ function App() {
             ) : (
               <Link to="/signin">Iniciar sesión</Link>
             )}
-            {userInfo && userInfo.isSeller && (
-              <div className="dropdown">
-                <Link to="#admin">
-                  Seller <i className="fa fa-caret-down"></i>
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/productlist/seller">Productos</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderlist/seller">Pedidos</Link>
-                  </li>
-                </ul>
-              </div>
-            )}
+            
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
                 <Link to="#admin">

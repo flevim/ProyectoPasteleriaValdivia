@@ -51,7 +51,7 @@ userRouter.post(
 			return;
 		}
     }
-    res.status(401).send({ message: 'Invalid email or password' });
+    res.status(401).send({ message: 'Correo electrónico y/o contraseña inválidas' });
   })
 );
 
@@ -60,7 +60,7 @@ userRouter.post(
 	expressAsyncHandler(async (req, res) => {
 		try {
 			const userCreated = await User.create({
-				username: req.body.username,
+				username: req.body.name,
 				email: req.body.email,
 				password: bcrypt.hashSync(req.body.password, 8),
 			});
@@ -106,7 +106,7 @@ userRouter.put(
   isAuth,
   expressAsyncHandler(async (req, res) => {
 	try {
-		const user = await User.findByPk(req.user._id);
+		const user = await User.findByPk(req.user.id);
 		console.log(user); 
 		if (user) {
 			if (req.body.password) {
@@ -122,7 +122,7 @@ userRouter.put(
 			const updatedUser = await user.update(userData);
 			
 			res.send({
-				_id: updatedUser._id,
+				id: updatedUser.id,
 				username: updatedUser.username,
 				email: updatedUser.email,
 				isAdmin: updatedUser.isAdmin,
@@ -159,10 +159,10 @@ userRouter.delete(
 				return;
 			}
 			const deleteUser = await user.destroy();
-			res.send({ message: 'User Deleted', user: deleteUser });
+			res.send({ message: 'Usuario Eliminado', user: deleteUser });
 			
 		} else {
-			res.status(404).send({ message: 'User Not Found' });
+			res.status(404).send({ message: 'Usuario no encontrado' });
 		}
 	
 	} catch(err) {

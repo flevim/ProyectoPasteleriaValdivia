@@ -47,7 +47,7 @@ const data = {
     {
       name: 'Pastel de Selva Negra',
       category: 'Pasteles',
-      image: '/images/selva-negra.jpg',
+      image: '/images/selva-negra.jpeg',
       price: 7990,
       countInStock: 1,
       description: 'La tarta o torta Selva Negra está compuesta por varias capas de bizcochuelo de chocolate embebido en kirsch e intercaladas con nata y cerezas.',
@@ -87,7 +87,7 @@ const data = {
     {
       name: 'Suspiro Limeño',
       category: 'Postres',
-      image: '/images/suspiro-limeño.jpg',
+      image: '/images/trufa.jpg',
       price: 13990,
       countInStock: 2,
       description: 'Según su dulce historia, este postre fue creado por Amparo Ayarza, esposa del poeta José Gálvez Barrenechea.'

@@ -66,9 +66,8 @@ productRouter.get(
     categories = categories.filter((value, index, self) =>
       index === self.findIndex((t) => (
         t.place === value.place && t.category === value.category
-    ))
-)
-    
+    )))
+     
     res.send(categories);
   })
 );

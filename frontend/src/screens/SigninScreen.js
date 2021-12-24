@@ -31,26 +31,26 @@ export default function SigninScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Sign In</h1>
+          <h1>Iniciar Sesión</h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email">Correo Electrónico</label>
           <input
             type="email"
             id="email"
-            placeholder="Enter email"
+            placeholder="Ingrese un correo..."
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Contraseña</label>
           <input
             type="password"
             id="password"
-            placeholder="Enter password"
+            placeholder="Ingrese contraseña..."
             required
             onChange={(e) => setPassword(e.target.value)}
           ></input>
@@ -58,16 +58,17 @@ export default function SigninScreen(props) {
         <div>
           <label />
           <button className="primary" type="submit">
-            Sign In
+            Iniciar sesión
           </button>
         </div>
         <div>
           <label />
           <div>
-            New customer?{' '}
-            <Link to={`/register?redirect=${redirect}`}>
-              Create your account
-            </Link>
+            Eres nuevo comprando?{' '}
+           
+              <span className='redirection'>
+                <Link to={`/register?redirect=${redirect}`}>Crea una cuenta</Link>
+                </span>
           </div>
         </div>
       </form>
