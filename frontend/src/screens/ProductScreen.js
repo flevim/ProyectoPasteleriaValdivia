@@ -60,7 +60,7 @@ export default function ProductScreen(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div>
-          <Link to="/">Back to result</Link>
+          <Link to="/"> Volver </Link>
           <div className="row top">
             <div className="col-2">
               <img
@@ -94,7 +94,7 @@ export default function ProductScreen(props) {
                   </li>
                   <li>
                     <div className="row">
-                      <div>Status</div>
+                      <div>Estado</div>
                       <div>
                         {product.countInStock > 0 ? (
                           <span className="success">Disponible</span>

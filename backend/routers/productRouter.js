@@ -3,7 +3,7 @@ import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 //import Product from '../models/productModel.js';
 import Product from '../models/Product.js'; 
-import User from '../models/userModel.js';
+import User from '../models/User.js';
 import { isAdmin, isAuth, isSellerOrAdmin } from '../utils.js';
 
 const productRouter = express.Router();
@@ -72,6 +72,34 @@ productRouter.get(
   })
 );
 
+productRouter.get('/categories/:category', 
+  expressAsyncHandler(async (req, res) => {
+    
+    try {
+      const categoryName = req.params.category;
+
+      console.log(category);  
+      const productsByCategory = await Product.findAll({
+        where: {
+          category: categoryName 
+        }
+      })
+  
+      if (productsByCategory) {
+        res.status(200).send(productsByCategory); 
+      
+      } else {
+        res.status(400).send({ msg: "Categoría no encontrada" })
+      }
+    
+    } catch (err) {
+       res.status(500).send({msg: err})
+    }
+        
+
+    
+  }))
+
 productRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
@@ -88,7 +116,7 @@ productRouter.get(
     } else {
       res
         .status(500)
-        .send({ message: 'No seller found. first run /api/users/seed' });
+        .send({ message: 'No existe un usurio administrador. Primero ejecute /api/users/seed' });
     }
   })
 );
@@ -100,7 +128,7 @@ productRouter.get(
     if (product) {
       res.send(product);
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: 'Producto no encontrado' });
     }
   })
 );

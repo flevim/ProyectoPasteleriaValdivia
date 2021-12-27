@@ -22,6 +22,7 @@ export default function CartScreen(props) {
     }
   }, [dispatch, productId, qty]);
 
+  console.log(productId)
   const removeFromCartHandler = (id) => {
     // delete action
     dispatch(removeFromCart(id));
@@ -30,6 +31,8 @@ export default function CartScreen(props) {
   const checkoutHandler = () => {
     navigate('/signin?redirect=/shipping');
   };
+
+  console.log(cartItems)
   return (
     <div className="row top">
       <div className="col-2">

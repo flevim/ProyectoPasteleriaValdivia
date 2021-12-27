@@ -87,9 +87,7 @@ function App() {
                   <li>
                     <Link to="/profile">Perfil de usuario</Link>
                   </li>
-                  <li>
-                    <Link to="/orderhistory">Historial de pedidos</Link>
-                  </li>
+                  
                   <li>
                     <Link to="#signout" onClick={signoutHandler}>
                       Cerrar sesión
@@ -119,9 +117,7 @@ function App() {
                   <li>
                     <Link to="/userlist">Usuarios</Link>
                   </li>
-                  <li>
-                    <Link to="/support">Support</Link>
-                  </li>
+                  
                 </ul>
               </div>
             )}
@@ -294,7 +290,7 @@ function App() {
           </Routes>
         </main>
         <footer className="row center">
-          {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
+          
           <div>Diseñado por <strong>pvaldivia</strong></div>{' '}
         </footer>
       </div>
