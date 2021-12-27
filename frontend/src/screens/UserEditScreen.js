@@ -13,7 +13,7 @@ export default function UserEditScreen(props) {
   const params = useParams();
   const { id: userId } = params;
 
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [isSeller, setIsSeller] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -37,9 +37,8 @@ export default function UserEditScreen(props) {
     if (!user) {
       dispatch(detailsUser(userId));
     } else {
-      setName(user.name);
+      setUsername(user.username);
       setEmail(user.email);
-      setIsSeller(user.isSeller);
       setIsAdmin(user.isAdmin);
     }
   }, [dispatch, navigate, successUpdate, user, userId]);
@@ -47,13 +46,14 @@ export default function UserEditScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     // dispatch update user
-    dispatch(updateUser({ _id: userId, name, email, isSeller, isAdmin }));
+    dispatch(updateUser({ id: userId, username, email, isAdmin }));
   };
+  
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Editar Usuario {name}</h1>
+          <h1>Editar Usuario {username}</h1>
           {loadingUpdate && <LoadingBox></LoadingBox>}
           {errorUpdate && (
             <MessageBox variant="danger">{errorUpdate}</MessageBox>
@@ -66,13 +66,13 @@ export default function UserEditScreen(props) {
         ) : (
           <>
             <div>
-              <label htmlFor="name">Nombre</label>
+              <label htmlFor="username">Nombre</label>
               <input
-                id="name"
+                id="username"
                 type="text"
                 placeholder="Enter name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               ></input>
             </div>
             <div>
