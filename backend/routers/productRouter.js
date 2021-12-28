@@ -72,19 +72,20 @@ productRouter.get(
   })
 );
 
-productRouter.get('/categories/:category', 
+productRouter.get('/categories/:categoryName', 
   expressAsyncHandler(async (req, res) => {
     
     try {
-      const categoryName = req.params.category;
+      const category = req.params.categoryName;
 
       console.log(category);  
       const productsByCategory = await Product.findAll({
         where: {
-          category: categoryName 
+          category: category 
         }
       })
-  
+      
+      console.log("Products by category: "+productsByCategory);
       if (productsByCategory) {
         res.status(200).send(productsByCategory); 
       
@@ -148,7 +149,7 @@ productRouter.post(
         description: 'sample description',
       });
       //const createdProduct = await product.create();
-      res.send({ message: 'Product Created', product: createdProduct }); 
+      res.send({ message: 'Product Created', product: product }); 
       
     } catch (err) {
       res.status(500).send({ msg: err });

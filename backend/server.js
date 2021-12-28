@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 
 syncDB();
 
+app.use(morgan('dev'));
 //mongoose.connect(process.env.MONGODB_URL);
 //app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
@@ -50,7 +51,6 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5000;
 
-app.use(morgan('dev'));
 const httpServer = http.Server(app);
 const io = new Server(httpServer, { cors: { origin: '*' } });
 const users = [];

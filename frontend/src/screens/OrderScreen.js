@@ -86,7 +86,7 @@ export default function OrderScreen(props) {
           <ul>
             <li>
               <div className="card card-body">
-                <h2>Shippring</h2>
+                <h2>Envíó</h2>
                 <p>
                   <strong>Nombre:</strong> {order.shippingAddress.fullName} <br />
                   <strong>Dirección: </strong> {order.shippingAddress.address},

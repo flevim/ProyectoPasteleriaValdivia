@@ -29,12 +29,14 @@ export default function ProductEditScreen(props) {
     success: successUpdate,
   } = productUpdate;
 
+  
   const dispatch = useDispatch();
+   
   useEffect(() => {
     if (successUpdate) {
       navigate('/productlist');
     }
-    if (!product || product._id !== productId || successUpdate) {
+    if (!product || product.id !== productId || successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
       dispatch(detailsProduct(productId));
     } else {
@@ -52,7 +54,7 @@ export default function ProductEditScreen(props) {
     // TODO: dispatch update product
     dispatch(
       updateProduct({
-        _id: productId,
+        id: productId,
         name,
         price,
         image,
@@ -87,7 +89,7 @@ export default function ProductEditScreen(props) {
       setLoadingUpload(false);
     }
   };
-
+  
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>

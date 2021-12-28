@@ -39,7 +39,7 @@ export default function HomeScreen() {
           {products.length === 0 && <MessageBox>No se encuentran productos</MessageBox>}
           <div className="row center">
             {products.map((product) => (
-              <Product key={product._id} product={product}></Product>
+              <Product key={product.id} product={product}></Product>
             ))}
           </div>
         </>

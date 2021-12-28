@@ -36,11 +36,11 @@ export default function ShippingAddressScreen(props) {
       setLng(addressMap.lng);
     }
     let moveOn = true;
-    if (!newLat || !newLng) {
-      moveOn = window.confirm(
-        'You did not set your location on map. Continue?'
-      );
-    }
+    //if (!newLat || !newLng) {
+    //  moveOn = window.confirm(
+    //    'You did not set your location on map. Continue?'
+    //  );
+    //}
     if (moveOn) {
       dispatch(
         saveShippingAddress({
@@ -75,10 +75,10 @@ export default function ShippingAddressScreen(props) {
       <CheckoutSteps step1 step2></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Shipping Address</h1>
+          <h1>Dirección de Envío</h1>
         </div>
         <div>
-          <label htmlFor="fullName">Full Name</label>
+          <label htmlFor="fullName">Nombre Completo</label>
           <input
             type="text"
             id="fullName"
@@ -89,7 +89,7 @@ export default function ShippingAddressScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="address">Address</label>
+          <label htmlFor="address">Dirección</label>
           <input
             type="text"
             id="address"
@@ -100,7 +100,7 @@ export default function ShippingAddressScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="city">City</label>
+          <label htmlFor="city">Ciudad</label>
           <input
             type="text"
             id="city"
@@ -111,7 +111,7 @@ export default function ShippingAddressScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="postalCode">Postal Code</label>
+          <label htmlFor="postalCode">Código Postal</label>
           <input
             type="text"
             id="postalCode"
@@ -122,7 +122,7 @@ export default function ShippingAddressScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="country">Country</label>
+          <label htmlFor="country">Pais</label>
           <input
             type="text"
             id="country"
@@ -132,16 +132,11 @@ export default function ShippingAddressScreen(props) {
             required
           ></input>
         </div>
-        <div>
-          <label htmlFor="chooseOnMap">Location</label>
-          <button type="button" onClick={chooseOnMap}>
-            Choose On Map
-          </button>
-        </div>
+        
         <div>
           <label />
           <button className="primary" type="submit">
-            Continue
+            Continuar
           </button>
         </div>
       </form>

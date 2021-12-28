@@ -6,7 +6,7 @@ import MessageBox from '../components/MessageBox';
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 export default function ProfileScreen() {
-  const [name, setName] = useState('');
+  const [username, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -28,9 +28,9 @@ export default function ProfileScreen() {
   useEffect(() => {
     if (!user) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
-      dispatch(detailsUser(userInfo._id));
+      dispatch(detailsUser(userInfo.id));
     } else {
-      setName(user.name);
+      setName(user.username);
       setEmail(user.email);
       if (user.seller) {
         setSellerName(user.seller.name);
@@ -38,7 +38,7 @@ export default function ProfileScreen() {
         setSellerDescription(user.seller.description);
       }
     }
-  }, [dispatch, userInfo._id, user]);
+  }, [dispatch, userInfo.id, user]);
   const submitHandler = (e) => {
     e.preventDefault();
     // dispatch update profile
@@ -47,8 +47,8 @@ export default function ProfileScreen() {
     } else {
       dispatch(
         updateUserProfile({
-          userId: user._id,
-          name,
+          userId: user.id,
+          username,
           email,
           password,
           sellerName,
@@ -62,7 +62,7 @@ export default function ProfileScreen() {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>User Profile</h1>
+          <h1>Perfil de Usuario: {username}</h1>
         </div>
         {loading ? (
           <LoadingBox></LoadingBox>
@@ -76,21 +76,21 @@ export default function ProfileScreen() {
             )}
             {successUpdate && (
               <MessageBox variant="success">
-                Profile Updated Successfully
+                Perfil Actualizado Exitósamente
               </MessageBox>
             )}
             <div>
-              <label htmlFor="name">Name</label>
+              <label htmlFor="username">Nombre de Usuario</label>
               <input
-                id="name"
+                id="username"
                 type="text"
                 placeholder="Enter name"
-                value={name}
+                value={username}
                 onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Correo Electrónico</label>
               <input
                 id="email"
                 type="email"
@@ -100,7 +100,7 @@ export default function ProfileScreen() {
               ></input>
             </div>
             <div>
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Contraseña</label>
               <input
                 id="password"
                 type="password"
@@ -109,7 +109,7 @@ export default function ProfileScreen() {
               ></input>
             </div>
             <div>
-              <label htmlFor="confirmPassword">confirm Password</label>
+              <label htmlFor="confirmPassword">Confirmar Contraseña</label>
               <input
                 id="confirmPassword"
                 type="password"
@@ -155,7 +155,7 @@ export default function ProfileScreen() {
             <div>
               <label />
               <button className="primary" type="submit">
-                Update
+                Actualizar Usuario
               </button>
             </div>
           </>

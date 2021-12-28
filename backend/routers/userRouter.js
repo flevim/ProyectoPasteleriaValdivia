@@ -42,7 +42,7 @@ userRouter.post(
 		let passwordIsValid = bcrypt.compareSync(req.body.password, user.password); 
 		if (passwordIsValid) {
 			res.send({
-				_id: user._id,
+				id: user.id,
 				name: user.name,
 				email: user.email,
 				isAdmin: user.isAdmin,
@@ -62,12 +62,12 @@ userRouter.post(
 			const userCreated = await User.create({
 				username: req.body.name,
 				email: req.body.email,
-				password: bcrypt.hashSync(req.body.password, 8),
+				password: bcrypt.hashSync(req.body.password, 10),
 			});
 			console.log(userCreated);
 			if (userCreated) {
 				res.json({
-					_id: userCreated._id,
+					id: userCreated.id,
 					username: userCreated.username,
 					email: userCreated.email,
 					isAdmin: userCreated.isAdmin,
@@ -106,8 +106,9 @@ userRouter.put(
   isAuth,
   expressAsyncHandler(async (req, res) => {
 	try {
-		const user = await User.findByPk(req.user.id);
-		console.log(user); 
+		console.log(req.body.userId); 
+		const user = await User.findByPk(req.body.userId);
+		console.log("Usuario: "+user); 
 		if (user) {
 			if (req.body.password) {
 				user.password = bcrypt.hashSync(req.body.password, 8);

@@ -345,8 +345,8 @@ img.large {
   font-weight: bold;
 }
 .checkout-steps > div.active {
-  border-top-color: #f08000;
-  color: #f08000;
+  border-top-color: #FF5677;
+  color: #FF5677;
 }
 /* Table */
 .table {
