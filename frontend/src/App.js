@@ -30,6 +30,7 @@ import MessageBox from './components/MessageBox';
 import MapScreen from './screens/MapScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import SupportScreen from './screens/SupportScreen';
+import CategoryScreen from './screens/CategoryScreen';
 import ChatBox from './components/ChatBox';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -177,6 +178,11 @@ function App() {
               path="/orderhistory"
               element={<OrderHistoryScreen />}
             ></Route>
+
+
+            <Route path="/categories/:name" element={<CategoryScreen />}></Route>
+            
+            
             <Route path="/search/name" element={<SearchScreen />} exact></Route>
             <Route
               path="/search/name/:name"

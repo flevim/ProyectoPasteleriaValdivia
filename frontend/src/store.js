@@ -19,6 +19,7 @@ import {
   productListReducer,
   productReviewCreateReducer,
   productUpdateReducer,
+  productsByCategoryReducer
 } from './reducers/productReducers';
 import {
   userAddressMapReducer,
@@ -51,6 +52,7 @@ const initialState = {
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
+  productListByCategory: productsByCategoryReducer,
   cart: cartReducer,
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
