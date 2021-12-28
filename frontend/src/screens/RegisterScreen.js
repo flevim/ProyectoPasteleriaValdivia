@@ -7,7 +7,7 @@ import MessageBox from '../components/MessageBox';
 
 export default function RegisterScreen(props) {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
+  const [username, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -25,7 +25,7 @@ export default function RegisterScreen(props) {
     if (password !== confirmPassword) {
       alert('Password and confirm password are not match');
     } else {
-      dispatch(register(name, email, password));
+      dispatch(register(username, email, password));
     }
   };
   useEffect(() => {
@@ -40,14 +40,17 @@ export default function RegisterScreen(props) {
           <h1>Crear cuenta</h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
-        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        {error && error.map((err) => (
+          <MessageBox variant="danger">
+            <p key={err.msg}>{err.msg}</p>
+          </MessageBox>
+        ))}
         <div>
-          <label htmlFor="name">Nombre</label>
+          <label htmlFor="username">Nombre de Usuario</label>
           <input
             type="text"
-            id="name"
+            id="username"
             placeholder="Ingrese un nombre..."
-            required
             onChange={(e) => setName(e.target.value)}
           ></input>
         </div>
@@ -57,7 +60,6 @@ export default function RegisterScreen(props) {
             type="email"
             id="email"
             placeholder="Ingrese contraseña..."
-            required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
@@ -67,7 +69,6 @@ export default function RegisterScreen(props) {
             type="password"
             id="password"
             placeholder="Ingrese contraseña..."
-            required
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
@@ -77,7 +78,6 @@ export default function RegisterScreen(props) {
             type="password"
             id="confirmPassword"
             placeholder="Confirme su contraseña..."
-            required
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></input>
         </div>

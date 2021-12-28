@@ -34,14 +34,17 @@ export default function SigninScreen(props) {
           <h1>Iniciar Sesión</h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
-        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        {error && error.map((err) => (
+          <MessageBox variant="danger">
+            <p key={err.msg}>{err.msg}</p>
+          </MessageBox>
+        ))}
         <div>
           <label htmlFor="email">Correo Electrónico</label>
           <input
             type="email"
             id="email"
             placeholder="Ingrese un correo..."
-            required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
@@ -51,7 +54,6 @@ export default function SigninScreen(props) {
             type="password"
             id="password"
             placeholder="Ingrese contraseña..."
-            required
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>

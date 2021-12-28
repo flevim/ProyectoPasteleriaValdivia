@@ -110,7 +110,7 @@ productRouter.get(
     if (admin) {
       const products = data.products.map((product) => ({
         ...product,
-        admin: admin._id,
+        admin: admin.id,
       }));
       const createdProducts = await Product.bulkCreate(products);
       res.send({ createdProducts });

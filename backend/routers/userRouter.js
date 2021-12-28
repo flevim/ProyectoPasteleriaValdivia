@@ -1,6 +1,7 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
+import { check, validationResult } from 'express-validator/check';
 import data from '../data.js';
 //import User from '../models/userModel.js';
 import User from '../models/User.js'; 
@@ -31,53 +32,83 @@ userRouter.get(
 
 userRouter.post(
   '/signin',
+  [
+	check('email', 'Email debe ser válido').isEmail(),
+	check('password', 'Este campo no puede estar vacío').not().isEmpty()
+	],
   expressAsyncHandler(async (req, res) => {
-	const user = await User.findOne({ 
-      	where: {
-        	email: req.body.email
-      	} 
-    });
-    
-	if (user) {
-		let passwordIsValid = bcrypt.compareSync(req.body.password, user.password); 
-		if (passwordIsValid) {
-			res.send({
-				id: user.id,
-				name: user.name,
-				email: user.email,
-				isAdmin: user.isAdmin,
-				token: generateToken(user),
+		const errors = validationResult(req); 
+		console.log(errors); 
+		
+		if (!errors.isEmpty()) {
+			return res.status(400).send({errors: errors.array()});
+		
+		} else {
+			const user = await User.findOne({ 
+				where: {
+					email: req.body.email
+				} 
 			});
-			return;
+			
+			if (user) {
+				let passwordIsValid = bcrypt.compareSync(req.body.password, user.password); 
+				if (passwordIsValid) {
+					res.send({
+						id: user.id,
+						username: user.username,
+						email: user.email,
+						isAdmin: user.isAdmin,
+						token: generateToken(user),
+					});
+					return;
+				}
+			}
+			res.status(401).send({errors: [{msg: 'Correo electrónico y/o contraseña inválidas'}]});
 		}
-    }
-    res.status(401).send({ message: 'Correo electrónico y/o contraseña inválidas' });
+
+		
   })
 );
 
 userRouter.post(
 	'/register',
+	[
+		check('username', 'Nombre de usuario debe tener más de 4 caracteres').isLength({min:5}),
+		check('email', 'Email debe ser válido').isEmail(),
+		check('password', 'Tu contraseña debe tener al menos 6 caracteres').isLength({ min: 6 })
+	],
 	expressAsyncHandler(async (req, res) => {
 		try {
-			const userCreated = await User.create({
-				username: req.body.name,
-				email: req.body.email,
-				password: bcrypt.hashSync(req.body.password, 10),
-			});
-			console.log(userCreated);
-			if (userCreated) {
-				res.json({
-					id: userCreated.id,
-					username: userCreated.username,
-					email: userCreated.email,
-					isAdmin: userCreated.isAdmin,
-					token: generateToken(userCreated),
+			const errors = validationResult(req); 
+			console.log(errors); 
+
+			if (!errors.isEmpty()) {
+				return res.status(400).send({errors: errors.array()});
+			
+			} else {
+				const userCreated = await User.create({
+					username: req.body.username,
+					email: req.body.email,
+					password: bcrypt.hashSync(req.body.password, 10),
 				});
-				
+				if (userCreated) {
+					res.json({
+						id: userCreated.id,
+						username: userCreated.username,
+						email: userCreated.email,
+						isAdmin: userCreated.isAdmin,
+						token: generateToken(userCreated),
+					});
+					
+				}
+		
 			}
-	
+
+
+
+			
 		} catch (err) {
-			res.status(500).send({ msg: "Error" })
+			res.status(500).send({ errors: [{msg: "Server Error"}]})
 		}
 		
 
@@ -177,6 +208,7 @@ userRouter.put(
   '/:id',
   isAuth,
   isAdmin,
+  
   expressAsyncHandler(async (req, res) => {
 	try {
 		const user = await User.findByPk(req.params.id);

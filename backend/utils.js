@@ -26,7 +26,7 @@ export const isAuth = (req, res, next) => {
       process.env.JWT_SECRET || 'somethingsecret',
       (err, decode) => {
         if (err) {
-          res.status(401).send({ message: 'Invalid Token' });
+          res.status(401).send({ message: 'Token Inválido' });
         } else {
           req.user = decode;
           next();
@@ -34,14 +34,14 @@ export const isAuth = (req, res, next) => {
       }
     );
   } else {
-    res.status(401).send({ message: 'No Token' });
+    res.status(401).send({ message: 'No se proporcionó un Token' });
   }
 };
 export const isAdmin = (req, res, next) => {
   if (req.user && req.user.isAdmin) {
     next();
   } else {
-    res.status(401).send({ message: 'Invalid Admin Token' });
+    res.status(401).send({ message: 'Token de Administrador Inválido' });
   }
 };
 export const isSeller = (req, res, next) => {
