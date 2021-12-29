@@ -12,7 +12,7 @@ body {
   font-weight: 700;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ededed;
+  background-color: #e9e9e9;
 }
 #root {
   height: 100%;
@@ -26,7 +26,7 @@ body {
     'main'
     'footer';
   grid-template-columns: 1fr;
-  grid-template-rows: 7rem 1fr 5rem;
+  grid-template-rows: 8.5rem 1fr 5rem;
   height: 100%;
 }
 header {
@@ -232,20 +232,23 @@ img.large {
 
 /* Card */
 .card {
-  border: 0.1rem #c0c0c0 solid;
-  background-color: #f8f8f8;
-  border-radius: 0.5rem;
-  margin: 2rem;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 25%;
-  height: 360px;
+  width: 300px;
+  height: 500px;
+  background: white;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0;
+  transform: scale(0.97);
+  transition: box-shadow 0.8s, 
 }
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  transform: scale(1);
+	box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.2);
 }
 .card-body {
-  padding:0.1rem;
+  padding:1rem;
   
 }
 .card-body h2 {

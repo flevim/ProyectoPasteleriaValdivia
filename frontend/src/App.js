@@ -163,11 +163,7 @@ function App() {
               element={<ProductScreen />}
               exact
             ></Route>
-            <Route
-              path="/product/:id/edit"
-              element={ProductEditScreen}
-              exact
-            ></Route>
+            
             <Route path="/signin" element={<SigninScreen />}></Route>
             <Route path="/register" element={<RegisterScreen />}></Route>
             <Route path="/shipping" element={<ShippingAddressScreen />}></Route>
@@ -178,7 +174,11 @@ function App() {
               path="/orderhistory"
               element={<OrderHistoryScreen />}
             ></Route>
-
+            <Route
+              path="/product/:id/edit"
+              element={<ProductEditScreen />}
+              exact
+            ></Route>
 
             <Route path="/categories/:name" element={<CategoryScreen />}></Route>
             

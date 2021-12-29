@@ -61,6 +61,7 @@ export default function ProductScreen(props) {
       ) : (
         <div>
           <Link to="/"> Volver </Link>
+          
           <div className="row top">
             <div className="col-2">
               <img

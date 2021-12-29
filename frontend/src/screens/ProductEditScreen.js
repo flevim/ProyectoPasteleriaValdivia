@@ -16,7 +16,7 @@ export default function ProductEditScreen(props) {
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
-  const [brand, setBrand] = useState('');
+  //const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
 
   const productDetails = useSelector((state) => state.productDetails);
@@ -34,10 +34,11 @@ export default function ProductEditScreen(props) {
    
   useEffect(() => {
     if (successUpdate) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
       navigate('/productlist');
     }
-    if (!product || product.id !== productId || successUpdate) {
-      dispatch({ type: PRODUCT_UPDATE_RESET });
+    if (!product || successUpdate) {
+      //dispatch({ type: PRODUCT_UPDATE_RESET });
       dispatch(detailsProduct(productId));
     } else {
       setName(product.name);
@@ -45,10 +46,10 @@ export default function ProductEditScreen(props) {
       setImage(product.image);
       setCategory(product.category);
       setCountInStock(product.countInStock);
-      setBrand(product.brand);
       setDescription(product.description);
     }
   }, [product, dispatch, productId, successUpdate, navigate]);
+  
   const submitHandler = (e) => {
     e.preventDefault();
     // TODO: dispatch update product
@@ -59,7 +60,6 @@ export default function ProductEditScreen(props) {
         price,
         image,
         category,
-        brand,
         countInStock,
         description,
       })
@@ -70,6 +70,7 @@ export default function ProductEditScreen(props) {
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -84,6 +85,7 @@ export default function ProductEditScreen(props) {
       });
       setImage(data);
       setLoadingUpload(false);
+    
     } catch (error) {
       setErrorUpload(error.message);
       setLoadingUpload(false);
@@ -94,7 +96,7 @@ export default function ProductEditScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Edit Product {productId}</h1>
+          <h1>Editar Producto</h1>
         </div>
         {loadingUpdate && <LoadingBox></LoadingBox>}
         {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
@@ -105,37 +107,38 @@ export default function ProductEditScreen(props) {
         ) : (
           <>
             <div>
-              <label htmlFor="name">Name</label>
+              
+              <label htmlFor="name">Nombre</label>
               <input
                 id="name"
                 type="text"
-                placeholder="Enter name"
+                placeholder="Ingrese nombre..."
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="price">Price</label>
+              <label htmlFor="price">Precio</label>
               <input
                 id="price"
                 type="text"
-                placeholder="Enter price"
+                placeholder="Ingrese un precio..."
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="image">Image</label>
+              <label htmlFor="image">Imagen</label>
               <input
                 id="image"
                 type="text"
-                placeholder="Enter image"
+                placeholder="Ingrese imagen..."
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="imageFile">Image File</label>
+              <label htmlFor="imageFile">Archivo de Imagen</label>
               <input
                 type="file"
                 id="imageFile"
@@ -148,42 +151,32 @@ export default function ProductEditScreen(props) {
               )}
             </div>
             <div>
-              <label htmlFor="category">Category</label>
+              <label htmlFor="category">Categoría</label>
               <input
                 id="category"
                 type="text"
-                placeholder="Enter category"
+                placeholder="Ingrese categoría..."
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="brand">Brand</label>
-              <input
-                id="brand"
-                type="text"
-                placeholder="Enter brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="countInStock">Count In Stock</label>
+              <label htmlFor="countInStock">Cantidad en Stock</label>
               <input
                 id="countInStock"
                 type="text"
-                placeholder="Enter countInStock"
+                placeholder="Ingrese Cantidad en Stock..."
                 value={countInStock}
                 onChange={(e) => setCountInStock(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="description">Description</label>
+              <label htmlFor="description">Descripción</label>
               <textarea
                 id="description"
                 rows="3"
                 type="text"
-                placeholder="Enter description"
+                placeholder="Ingrese descripción..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
@@ -191,7 +184,7 @@ export default function ProductEditScreen(props) {
             <div>
               <label></label>
               <button className="primary" type="submit">
-                Update
+                Actualizar Producto
               </button>
             </div>
           </>

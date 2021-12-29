@@ -17,7 +17,6 @@ export default function ProductListScreen(props) {
   const navigate = useNavigate();
   const { pageNumber = 1 } = useParams();
   const { pathname } = useLocation();
-  const sellerMode = pathname.indexOf('/seller') >= 0;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
 
@@ -35,25 +34,25 @@ export default function ProductListScreen(props) {
     error: errorDelete,
     success: successDelete,
   } = productDelete;
+
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });
-      navigate(`/product/${createdProduct.id}/edit`);
+      //navigate(`/product/${createdProduct.id}/edit`);
     }
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
     dispatch(
-      listProducts({ seller: sellerMode ? userInfo.id : '', pageNumber })
+      listProducts({ pageNumber })
     );
   }, [
     createdProduct,
     dispatch,
     navigate,
-    sellerMode,
     successCreate,
     successDelete,
     userInfo.id,
@@ -95,7 +94,8 @@ export default function ProductListScreen(props) {
                 <th>NOMBRE</th>
                 <th>PRECIO</th>
                 <th>CATEGORÍA</th>
-                
+                <th>STOCK</th>
+
                 <th>ACCIONES</th>
               </tr>
             </thead>
@@ -106,6 +106,8 @@ export default function ProductListScreen(props) {
                   <td>{product.name}</td>
                   <td>{product.price}</td>
                   <td>{product.category}</td>
+                  <td>{product.countInStock} </td>
+
                   
                   <td>
                     <button
