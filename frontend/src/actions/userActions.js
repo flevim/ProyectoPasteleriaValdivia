@@ -26,13 +26,14 @@ import {
   USER_TOPSELLERS_LIST_FAIL,
 } from '../constants/userConstants';
 
-export const register = (username, email, password) => async (dispatch) => {
+export const register = (username, email, password, confirmPassword) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
   try {
     const { data } = await Axios.post('/api/users/register', {
       username,
       email,
       password,
+      confirmPassword
     });
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });

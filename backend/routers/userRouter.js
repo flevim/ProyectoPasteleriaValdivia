@@ -1,7 +1,7 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
-import { check, validationResult } from 'express-validator/check';
+import { check, validationResult} from 'express-validator/check';
 import data from '../data.js';
 //import User from '../models/userModel.js';
 import User from '../models/User.js'; 
@@ -75,16 +75,29 @@ userRouter.post(
 	[
 		check('username', 'Nombre de usuario debe tener más de 4 caracteres').isLength({min:5}),
 		check('email', 'Email debe ser válido').isEmail(),
-		check('password', 'Tu contraseña debe tener al menos 6 caracteres').isLength({ min: 6 })
+		check('password', 'Tu contraseña debe tener al menos 6 caracteres').isLength({ min: 6 }),
+		
 	],
 	expressAsyncHandler(async (req, res) => {
 		try {
+			const userExistence = await User.findOne({ 
+				where: {
+					email: req.body.email
+				} 
+			});
+			console.log(userExistence);
+
 			const errors = validationResult(req); 
 			console.log(errors); 
 
 			if (!errors.isEmpty()) {
 				return res.status(400).send({errors: errors.array()});
+			}
+
 			
+			if (userExistence) {
+				return res.status(400).send({ errors: [{msg: "Este usuario ya existe"}]  })
+				
 			} else {
 				const userCreated = await User.create({
 					username: req.body.username,
@@ -186,8 +199,8 @@ userRouter.delete(
 	try {
 		const user = await User.findByPk(req.params.id);
 		if (user) {
-			if (user.email === 'admin@example.com') {
-				res.status(400).send({ message: 'Can Not Delete Admin User' });
+			if (user.isAdmin === true) {
+				res.status(400).send({ message: 'No puedes eliminar a otro usuario administrador.' });
 				return;
 			}
 			const deleteUser = await user.destroy();
@@ -213,6 +226,10 @@ userRouter.put(
 	try {
 		const user = await User.findByPk(req.params.id);
 		if (user) {
+			if (user.isAdmin === true && user.id !== req.params.id) {
+				res.status(400).send({ message: 'No puedes editar a otro usuario administrador.' });
+				return;
+			}
 			const userData = {
 				username: req.body.username || user.username,
 				email: req.body.email || user.email,

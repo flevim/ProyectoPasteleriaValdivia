@@ -141,15 +141,15 @@ productRouter.post(
   expressAsyncHandler(async (req, res) => {
     try {
       const product = await Product.create({
-        name: 'sample name ' + Date.now(),
-        image: '/images/p1.jpg',
-        price: 0,
-        category: 'sample category',
+        name: 'Producto de test ' + Date.now(),
+        image: '/images/image_example.jpg',
+        price: 5990,
+        category: 'Pasteles',
         countInStock: 0,
-        description: 'sample description',
+        description: 'Descripción de testing',
       });
       //const createdProduct = await product.create();
-      res.send({ message: 'Product Created', product: product }); 
+      res.send({ message: 'Producto Creado', product: product }); 
       
     } catch (err) {
       res.status(500).send({ msg: err });
@@ -177,9 +177,9 @@ productRouter.put(
         
         }
         const updatedProduct = await product.update(productData);
-        res.send({ message: 'Product Updated', product: updatedProduct });
+        res.send({ message: 'Producto actualizado exitósamente', product: updatedProduct });
       } else {
-        res.status(404).send({ message: 'Product Not Found' });
+        res.status(404).send({ message: 'Producto no encontrado' });
       }
     
     } catch (err) {
@@ -197,9 +197,9 @@ productRouter.delete(
     const product = await Product.findByPk(req.params.id);
     if (product) {
       const deleteProduct = await product.destroy();
-      res.send({ message: 'Product Deleted', product: deleteProduct });
+      res.send({ message: 'Producto eliminado exitósamente', product: deleteProduct });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: 'Producto no encontrado' });
     }
   })
 );

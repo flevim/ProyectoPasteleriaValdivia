@@ -11,13 +11,33 @@ export default function Product(props) {
         <img className="medium" src={product.image} alt={product.name} />
       </Link>
       <div className="card-body">
-        <Link to={`/product/${product.id}`}>
           <h2>{product.name}</h2>
-        </Link>
+        <div className="row">
+          <div className="category-product">{product.category}</div>
+          
+          
+        </div>
+        <div className="row">
+          {product.countInStock > 0 ? (
+                          <span className="stock success">Disponible</span>
+                        ) : (
+                          <span className="stock danger">No Disponible</span>
+          )}
+          
+        </div>
+        
         <div className="row">
           <div className="price">${product.price}</div>
           
         </div>
+        <div className="row">
+          <div className="details-product"><Link to={`/product/${product.id}`}>
+          Detalles →
+        </Link></div>
+          
+        </div>
+        
+        
       </div>
     </div>
   );

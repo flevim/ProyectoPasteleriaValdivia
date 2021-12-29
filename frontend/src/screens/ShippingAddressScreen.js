@@ -82,7 +82,7 @@ export default function ShippingAddressScreen(props) {
           <input
             type="text"
             id="fullName"
-            placeholder="Enter full name"
+            placeholder="Ingrese un nombre completo"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
@@ -93,7 +93,7 @@ export default function ShippingAddressScreen(props) {
           <input
             type="text"
             id="address"
-            placeholder="Enter address"
+            placeholder="Ingrese una dirección"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
@@ -104,7 +104,7 @@ export default function ShippingAddressScreen(props) {
           <input
             type="text"
             id="city"
-            placeholder="Enter city"
+            placeholder="Ingrese su ciudad..."
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
@@ -115,7 +115,7 @@ export default function ShippingAddressScreen(props) {
           <input
             type="text"
             id="postalCode"
-            placeholder="Enter postal code"
+            placeholder="Ingrese código postal"
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
             required
@@ -126,7 +126,7 @@ export default function ShippingAddressScreen(props) {
           <input
             type="text"
             id="country"
-            placeholder="Enter country"
+            placeholder="Ingrese país"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required

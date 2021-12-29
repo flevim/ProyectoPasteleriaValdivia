@@ -29,7 +29,7 @@ export default function HomeScreen() {
   return (
     <div>
       
-      <h2>Productos</h2>
+      <h2 className='title-products'>Productos</h2>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
